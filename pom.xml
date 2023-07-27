@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.1</version>
+        <version>2.6.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>io.axoniq.demo.bikerental</groupId>
@@ -31,24 +31,7 @@
         <dependency>
             <groupId>org.axonframework</groupId>
             <artifactId>axon-spring-boot-starter</artifactId>
-            <version>4.8.0</version>
-<!--
-            <exclusions>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-tcnative-boringssl-static</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-tcnative-classes</artifactId>
-                </exclusion>
-            </exclusions>
--->
-        </dependency>
-        <dependency>
-            <groupId>org.axonframework.extensions.springnative</groupId>
-            <artifactId>axon-spring-native</artifactId>
-            <version>4.8.0-SNAPSHOT</version>
+            <version>4.6.8</version>
         </dependency>
 
         <dependency>
@@ -56,7 +39,6 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -70,62 +52,4 @@
         </dependency>
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>native</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.graalvm.buildtools</groupId>
-                        <artifactId>native-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>build-native</id>
-                                <goals>
-                                    <goal>compile-no-fork</goal>
-                                </goals>
-                                <phase>package</phase>
-<!--
-                                <configuration>
-                                    <buildArgs combine.children="append">
-                                        <buildArg>&#45;&#45;initialize-at-build-time=org.slf4j.LoggerFactory</buildArg>
-                                        <buildArg>&#45;&#45;initialize-at-build-time=org.slf4j.simple.SimpleLogger</buildArg>
-                                        <buildArg>&#45;&#45;initialize-at-build-time=org.slf4j.impl.StaticLoggerBinder
-                                        </buildArg>
-                                        <buildArg>&#45;&#45;initialize-at-run-time=io.netty.util.internal.logging.Log4JLogger
-                                        </buildArg>
-                                        <buildArg>&#45;&#45;initialize-at-run-time=io.netty.util.AbstractReferenceCounted
-                                        </buildArg>
-                                        <buildArg>&#45;&#45;initialize-at-run-time=io.netty.channel.epoll</buildArg>
-                                        <buildArg>&#45;&#45;initialize-at-run-time=io.netty.handler.ssl</buildArg>
-                                        <buildArg>&#45;&#45;initialize-at-run-time=io.netty.channel.unix</buildArg>
-                                    </buildArgs>
-
-                                </configuration>
--->
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <classifier>${repackage.classifier}</classifier>
-                    <image>
-                        <builder>paketobuildpacks/builder:tiny</builder>
-                        <env>
-                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
-                        </env>
-                    </image>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
